@@ -1,26 +1,14 @@
-
-var store = {
-	title: ""
-	items: [
-		{title: "git clone hello-world-imba"}
-		{title: "npm install"}
-		{title: "npm run dev"}
-		{title: "play around"}
-	]
-}
-
 tag App
-	def addItem
-		data:items.push(title: data:title)
-		data:title = ""
-		
+	prop count
+
+	def addNum num
+		@count = @count + num
+
 	def render
-		<self.vbox>
-			<header>
-				<input[data:title] placeholder="New..." :keyup.enter.addItem>
-				<button :tap.addItem> 'Add item'
-			<ul> for item in data:items
-				<li> item:title
+		<self>
+			<div.Container>
+				<button.MyButton :tap.addNum(1)> "+"
+				<h1.Display> @count
+				<button.MyButton :tap.addNum(-1)> "-"
 
-
-Imba.mount <App[store]>
+Imba.mount <App count=0>
